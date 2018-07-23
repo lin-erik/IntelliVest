@@ -1,0 +1,36 @@
+{
+  "name": "intelligent-investing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lin-erik/intelligent-investing.git"
+  },
+  "keywords": [],
+  "author": "Erik",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lin-erik/intelligent-investing/issues"
+  },
+  "homepage": "https://github.com/lin-erik/intelligent-investing#readme",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.23.0",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "dygraphs": "^2.1.0",
+    "express": "^4.16.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "watson-developer-cloud": "^3.7.0"
+  }
+}
