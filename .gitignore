@@ -3,3 +3,6 @@ node_modules
 
 // bundle.js
 client/dist/bundle.js
+
+// config.js
+config.js
