@@ -1,4 +1,4 @@
-{
+module.exports = {
 	"matching_results": 5011,
 	"aggregations": [
 		{
