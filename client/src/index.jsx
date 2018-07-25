@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Display from './components/Display.jsx';
-import Search from './components/Search.jsx';
 
 import axios from 'axios';
 
@@ -60,9 +59,12 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <Search handleChange={this.handleChange} handleSubmit={this.handleSubmit} symbol={this.state.symbol} />
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" value={this.state.symbol} placeholder='Test' onChange={this.handleChange} />
+          <input type="submit" value="Submit" />
+        </form>
 
-        <Display stocks={this.state.stocks} />
+        <Display symbol={this.state.symbol} stocks={this.state.stocks} />
       </div>
     );
   }
