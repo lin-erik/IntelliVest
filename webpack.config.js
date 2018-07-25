@@ -17,6 +17,11 @@ module.exports = {
         query: {
           presets: ['react', 'es2015']
         }
+      },
+      {
+        test: /\.css$/,
+        include: DIST_DIR,
+        loader: ['style-loader', 'css-loader']
       }
     ]
   }
