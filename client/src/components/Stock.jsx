@@ -1,4 +1,5 @@
 import React from 'react';
+import '/Users/erik/Desktop/MVP/intelligent-investing/client/dist/dygraph.css';
 
 import Dygraph from 'dygraphs';
 
@@ -11,8 +12,9 @@ class Stock extends React.Component {
   createGraph() {
     new Dygraph('graphdiv', this.props.stocks, {
       legend: 'always',
-      title: `FB Valuation`,
-      labels: ['Date', 'Value ($)']
+      title: `${this.props.symbol.toUpperCase()} Valuation`,
+      labels: ['Date', 'Value ($)'],
+      showRangeSelector: true
     });
   }
 
@@ -22,8 +24,7 @@ class Stock extends React.Component {
 
   render() {
     return(
-      // <div id='graphdiv' style={{margin: '25%'}}></div>
-      <div id='graphdiv'></div>
+      <div id='graphdiv' style={{margin: 'auto', width: '50%'}}></div>
     );
   }
 };
