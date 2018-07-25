@@ -11,10 +11,10 @@ class Display extends React.Component {
   render() {
     if (!this.props.stocks.length) {
       return null;
-    } else if (this.props.stocks.length > 0) {
+    } else {
       return(
         <div>
-          <Stock stocks={this.props.stocks} />
+          <Stock key={this.props.stocks} symbol={this.props.symbol} stocks={this.props.stocks} />
           <Analysis />
         </div>
       );
