@@ -105,10 +105,10 @@ class Sentiment extends React.Component {
 
         {this.state.child_sentiment.map( (el, ind) => {
           return(
-            <div>
+            <div key={ind}>
               <div>{el.key}</div>
               
-              <div key={ind} style={{width: '50%', height: '5%', color: '#414042', paddingTop: '1%', paddingBottom: '1%'}}>
+              <div style={{width: '50%', height: '5%', color: '#414042', paddingTop: '1%', paddingBottom: '1%'}}>
                 <span style={{width: el.negative, height: '100%', display: 'inline-block', background:'#F7B334'}}>&nbsp;</span>
                 <span style={{width: el.neutral, height: '100%', display: 'inline-block', background: '#A7A9AC'}}>&nbsp;</span>
                 <span style={{width: el.positive, height: '100%', display: 'inline-block', background: '#D57E00'}}>&nbsp;</span>
