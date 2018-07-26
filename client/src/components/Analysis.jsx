@@ -1,4 +1,5 @@
 import React from 'react';
+import Anomaly from './Anomaly.jsx';
 import Sentiment from './Sentiment.jsx';
 import TopResults from './TopResults.jsx';
 
@@ -13,6 +14,7 @@ class Analysis extends React.Component {
       <div>
         <TopResults />
         <Sentiment />
+        <Anomaly />
       </div>
     );
   }
