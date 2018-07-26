@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Display from './components/Display.jsx';
+import Landing from './components/Landing.jsx';
 
+import Input from '@material-ui/core/Input';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import Search from '@material-ui/icons/Search';
 import axios from 'axios';
+
+import '../dist/styles.css';
+import TextField from '@material-ui/core/TextField';
 
 class App extends React.Component {
   constructor(props) {
@@ -59,15 +67,51 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <input type="text" value={this.state.symbol} placeholder='Test' onChange={this.handleChange} />
-          <input type="submit" value="Submit" />
-        </form>
+        <div style={{width: '65%', margin: 'auto'}}>
+          <form onSubmit={this.handleSubmit}>
+            <FormControl fullWidth>
+              <Input
+              placeholder='Search'
+              value={this.state.symbol}
+              onChange={this.handleChange}
+              style={{fontSize: '20px'}}
+              endAdornment={
+                <InputAdornment position='end'>
+                  <Search />
+                </InputAdornment>
+              }
+              />
+            </FormControl>
+          </form>
+        </div>
 
-        <Display symbol={this.state.symbol} stocks={this.state.stocks} />
+        <div style={{width: '75%', margin: 'auto'}}>
+          <Landing />
+        </div>
+
+        <div>
+          <Display symbol={this.state.symbol} stocks={this.state.stocks} />
+        </div>
       </div>
     );
   }
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+{/* <Grid container spacing={8} alignItems="flex-end">
+  <Grid item>
+    <AccountCircle />
+  </Grid>
+  <Grid item>
+    <TextField id="input-with-icon-grid" label="With a grid" />
+  </Grid>
+</Grid> */}
+
+// import Input from '@material-ui/core/Input';
+// import InputLabel from '@material-ui/core/InputLabel';
+// import InputAdornment from '@material-ui/core/InputAdornment';
+// import FormControl from '@material-ui/core/FormControl';
+// import TextField from '@material-ui/core/TextField';
+// import Grid from '@material-ui/core/Grid';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
