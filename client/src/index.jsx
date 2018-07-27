@@ -6,11 +6,11 @@ import Landing from './components/Landing.jsx';
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
 import axios from 'axios';
 
 import '../dist/styles.css';
-import TextField from '@material-ui/core/TextField';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,7 +18,9 @@ class App extends React.Component {
 
     this.state = {
       stocks: [],
-      symbol: ''
+      updateAnalysis: 0,
+      symbol: '',
+      searched: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -34,7 +36,6 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log(this.state.symbol);
     this.getStock();
   }
 
@@ -59,7 +60,9 @@ class App extends React.Component {
       })
       .then( () => {
         this.setState({
-          stocks: container
+          stocks: container,
+          updateAnalysis: this.state.updateAnalysis++,
+          searched: true
         });
       });
   }
@@ -67,30 +70,42 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <div style={{width: '65%', margin: 'auto'}}>
-          <form onSubmit={this.handleSubmit}>
-            <FormControl fullWidth>
-              <Input
-              placeholder='Search'
-              value={this.state.symbol}
-              onChange={this.handleChange}
-              style={{fontSize: '20px'}}
-              endAdornment={
-                <InputAdornment position='end'>
-                  <Search />
-                </InputAdornment>
-              }
-              />
-            </FormControl>
-          </form>
-        </div>
+        <div style={{paddingTop: '1%', paddingBottom: '1%', boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)', backgroundColor: 'white'}}>
+          <Grid container spacing={8}>
+            <Grid style={{textAlign: 'center'}} item xs>
+              <div>Logo</div>
+            </Grid>
 
-        <div style={{width: '75%', margin: 'auto'}}>
-          <Landing />
+            <Grid item xs>
+              <form onSubmit={this.handleSubmit}>
+                <FormControl fullWidth>
+                  <Input
+                  placeholder='Search'
+                  value={this.state.symbol}
+                  onChange={this.handleChange}
+                  style={{fontSize: '15px', width: '75%', margin: 'auto'}}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      <Search />
+                    </InputAdornment>
+                  }
+                  />
+                </FormControl>
+              </form>
+            </Grid>
+
+            <Grid style={{textAlign: 'center'}} item xs>
+              <div>Login</div>
+            </Grid>
+          </Grid>
         </div>
 
         <div>
-          <Display symbol={this.state.symbol} stocks={this.state.stocks} />
+          <Landing searched={this.state.searched} />
+        </div>
+
+        <div>
+          <Display symbol={this.state.symbol} stocks={this.state.stocks} updateAnalysis={this.state.updateAnalysis} />
         </div>
       </div>
     );
@@ -98,20 +113,3 @@ class App extends React.Component {
 };
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-{/* <Grid container spacing={8} alignItems="flex-end">
-  <Grid item>
-    <AccountCircle />
-  </Grid>
-  <Grid item>
-    <TextField id="input-with-icon-grid" label="With a grid" />
-  </Grid>
-</Grid> */}
-
-// import Input from '@material-ui/core/Input';
-// import InputLabel from '@material-ui/core/InputLabel';
-// import InputAdornment from '@material-ui/core/InputAdornment';
-// import FormControl from '@material-ui/core/FormControl';
-// import TextField from '@material-ui/core/TextField';
-// import Grid from '@material-ui/core/Grid';
-// import AccountCircle from '@material-ui/icons/AccountCircle';
