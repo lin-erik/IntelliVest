@@ -21,12 +21,14 @@ class Stock extends React.Component {
   }
 
   componentDidMount() {
-    this.createGraph();
+    setTimeout(() => {
+      this.createGraph();
+    }, 5000);
   }
 
   render() {
     return(
-      <div id='graphdiv' style={{margin: 'auto', width: '50%'}}></div>
+      <div id='graphdiv' style={{ margin: 'auto', width: '50%', background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)' }}></div>
     );
   }
 };
