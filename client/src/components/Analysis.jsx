@@ -66,7 +66,7 @@ class Analysis extends React.Component {
 
       positive = (((positive / total) * 100) - 1).toFixed(5) + '%';
       negative = (((negative / total) * 100) - 1).toFixed(5) + '%';
-      neutral = ((neutral / total) * 100).toFixed(5) + '%';
+      neutral = ( ((neutral / total) * 100) - 1).toFixed(5) + '%';
 
       child_container.push({ key, positive, negative, neutral });
     });
@@ -95,7 +95,7 @@ class Analysis extends React.Component {
     var total = positive + negative + neutral;
     positive = (((positive / total) * 100) - 0.5).toFixed(5) + '%';
     negative = (((negative / total) * 100) - 0.5).toFixed(5) + '%';
-    neutral = ((neutral / total) * 100).toFixed(5) + '%';
+    neutral = ( ((neutral / total) * 100) - 0.5).toFixed(5) + '%';
 
     this.setState({
       main_sentiment: { positive, negative, neutral }
@@ -172,7 +172,7 @@ class Analysis extends React.Component {
     } else {
       return(
         <div style={{width: '75%', margin: 'auto', marginTop: '3%'}}>
-          <Grid container spacing={8}>
+          <Grid container spacing={16}>
             <Grid item xs>
               <TopResults top_results={this.state.top_results} />
             </Grid>
