@@ -1,5 +1,6 @@
 import React from 'react';
 import Overview from './Overview.jsx';
+import News from './News.jsx';
 
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
@@ -86,7 +87,7 @@ class Landing extends React.Component {
           </div>
 
           <div>
-            
+            <News />
           </div>
         </div>
       );
