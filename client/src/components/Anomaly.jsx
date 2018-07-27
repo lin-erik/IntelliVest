@@ -25,7 +25,7 @@ class Anomaly extends React.Component {
 
   render() {
     return(
-      <div>
+      <div style={{ background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)' }}>
         <LineChart width={600} height={300} data={this.props.anomaly}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
           <XAxis dataKey="name" />
