@@ -1,6 +1,8 @@
 import React from 'react';
 import Overview from './Overview.jsx';
-import { ButtonToolbar, ToggleButtonGroup, ToggleButton, DropdownButton, MenuItem } from 'react-bootstrap';
+
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
 import axios from 'axios';
 
@@ -9,10 +11,11 @@ class Landing extends React.Component {
     super(props);
 
     this.state = {
-      mostactive: [{symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}, {symbol: 'TEST'}],
+      mostactive: [],
       gainers: [],
       losers: [],
-      view: 'Most Active'
+      news: [],
+      view: 1
     };
 
     this.handleViewChange = this.handleViewChange.bind(this);
@@ -49,33 +52,45 @@ class Landing extends React.Component {
 
   handleViewChange(e) {
     this.setState({
-      view: e.target.text
+      view: e.target.value
     });
   }
 
   componentDidMount() {
     this.getOverview('mostactive');
-    // this.getOverview('gainers');
-    // this.getOverview('losers');
+    this.getOverview('gainers');
+    this.getOverview('losers');
   }
 
   render() {
-    return(
-      <div>
-        <h1 style={{textAlign: 'center'}}>Today's Market</h1>
-        <div style={{textAlign: 'center'}}>
-          <DropdownButton noCaret title={this.state.view} id='dropdown-no-caret'>
-            <MenuItem value='1' onClick={this.handleViewChange}>Most Active</MenuItem>
-            <MenuItem value='2' onClick={this.handleViewChange}>Top Gainers</MenuItem>
-            <MenuItem value='3' onClick={this.handleViewChange}>Top Losers</MenuItem>
-          </DropdownButton>
-        </div>
+    if (this.props.searched) {
+      return null;
+    } else {
+      return(
+        <div style={{padding: '2%', width: '75%', margin: 'auto', marginTop: '3%', backgroundColor: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'}}>
+          <h1 style={{textAlign: 'center'}}>Today's Market</h1>
+          <div style={{textAlign: 'center'}}>
+            <Select
+              value={this.state.view}
+              onChange={this.handleViewChange}
+              name="view"
+            >
+              <MenuItem value={1}>Most Active</MenuItem>
+              <MenuItem value={2}>Top Gainers</MenuItem>
+              <MenuItem value={3}>Top Losers</MenuItem>
+            </Select>
+          </div>
 
-        <div className='container-fluid' style={{margin: '1%'}}>
-          <Overview view={this.state.view} mostactive={this.state.mostactive} gainers={this.state.gainers} losers={this.state.losers} />
+          <div className='container-fluid' style={{margin: '1%'}}>
+            <Overview view={this.state.view} mostactive={this.state.mostactive} gainers={this.state.gainers} losers={this.state.losers} />
+          </div>
+
+          <div>
+            
+          </div>
         </div>
-      </div>
-    )
+      );
+    }
   }
 }
 
