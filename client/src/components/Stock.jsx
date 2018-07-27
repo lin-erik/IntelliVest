@@ -16,6 +16,8 @@ class Stock extends React.Component {
       labels: ['Date', 'Value ($)'],
       showRangeSelector: true
     });
+
+    this.props.createdGraph();
   }
 
   componentDidMount() {
