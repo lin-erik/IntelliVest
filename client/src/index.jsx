@@ -20,11 +20,19 @@ class App extends React.Component {
       stocks: [],
       updateAnalysis: 0,
       symbol: '',
-      searched: false
+      searched: false,
+      completed: 0,
+      graph_created: false,
+      analysis_complete: false
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.resetProgress = this.resetProgress.bind(this);
+
+    this.progress = this.progress.bind(this);
+    this.createdGraph = this.createdGraph.bind(this);
+    this.completedAnalysis = this.completedAnalysis.bind(this);
   }
 
   handleChange(e) {
@@ -36,7 +44,51 @@ class App extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
+    this.resetProgress(0);
+
+    this.setState({
+      graph_created: false,
+      analysis_complete: false
+    });
+
+    this.timer();
     this.getStock();
+  }
+
+  resetProgress(val) {
+    this.setState({
+      completed: val
+    });
+  }
+
+  timer() {
+    this.setState({
+      timer: setInterval(this.progress, 500)
+    });
+  }
+
+  progress() {
+    if (this.state.graph_created && this.state.analysis_complete) {
+      this.resetProgress(100);
+      clearInterval(this.state.timer);
+    } else {
+      var finished = this.state.completed;
+      var newProgress = Math.min(finished + Math.random() * 2, 100)
+
+      this.resetProgress(newProgress);
+    }
+  };
+
+  createdGraph() {
+    this.setState({
+      graph_created: true
+    });
+  }
+
+  completedAnalysis() {
+    this.setState({
+      analysis_complete: true
+    });
   }
 
   getStock() {
@@ -61,7 +113,6 @@ class App extends React.Component {
       .then( () => {
         this.setState({
           stocks: container,
-          updateAnalysis: this.state.updateAnalysis++,
           searched: true
         });
       });
@@ -105,7 +156,7 @@ class App extends React.Component {
         </div>
 
         <div>
-          <Display symbol={this.state.symbol} stocks={this.state.stocks} updateAnalysis={this.state.updateAnalysis} />
+          <Display completed={this.state.completed} symbol={this.state.symbol} stocks={this.state.stocks} createdGraph={this.createdGraph} completedAnalysis={this.completedAnalysis} />
         </div>
       </div>
     );
