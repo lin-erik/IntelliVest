@@ -1,9 +1,24 @@
 const express = require('express');
+const parser = require('body-parser');
+const session = require('express-session');
 const app = express();
 
 const discovery = require('../config.js');
+const models = require('./models.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(parser.json());
+app.use(session({
+  secret: 'toasted walnuts'
+}));
+
+function auth(req, res, next) {
+  if (req.session.userData) {
+    next();
+  } else {
+    res.redirect('/');
+  }
+};
 
 app.get('/discovery', (req, res) => {
   discovery.query({
@@ -23,6 +38,49 @@ app.get('/discovery', (req, res) => {
       res.send(response);
     }
   });
+});
+
+app.get('/login', (req, res) => {
+  models.login(req.query, (err, data) => {
+    if (err) {
+      res.status(404).send();
+    } else {
+      var sess = {
+        username: req.query.username,
+        userId: data.rows[0].id,
+        login: true
+      };
+
+      req.session.userData = sess;
+      res.send(data.rows[0]);
+    }
+  });
+});
+
+app.post('/register', (req, res) => {
+  models.register(req.body, (err, data) => {
+    if (err) {
+      res.status(404).send();
+    } else {
+      var sess = {
+        username: req.body.username,
+        userId: data.id,
+        login: true
+      };
+
+      req.session.userData = sess;
+      res.send(data);
+    }
+  });
+});
+
+app.get('/logout', (req, res) => {
+  delete req.session.userData;
+  res.send();
+});
+
+app.get('/*', auth, (req, res) => {
+  res.send(req.session.userData);
 });
 
 var port = process.env.PORT || 3000;
