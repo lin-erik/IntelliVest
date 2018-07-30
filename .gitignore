@@ -6,3 +6,6 @@ client/dist/bundle.js
 
 // config.js
 config.js
+
+// db.js
+server/db.js
