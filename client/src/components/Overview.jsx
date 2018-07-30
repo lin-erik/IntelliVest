@@ -18,7 +18,7 @@ const Overview = (props) => {
 
             <div style={{ bottom: '5px', right: '10px', position: 'absolute', textAlign: 'right' }}>
               <div style={{ fontWeight: 'bold' }}>{stock.iexRealtimePrice}</div>
-              <div style={{ fontSize: '11px' }}>{stock.changePercent}</div>
+              <div className={stock.changePercent.includes('-') ? 'negative' : 'positive'} style={{ fontSize: '11px' }}>{stock.changePercent}</div>
             </div>
           </Grid>
         ))}
@@ -38,7 +38,7 @@ const Overview = (props) => {
 
             <div style={{ bottom: '5px', right: '10px', position: 'absolute', textAlign: 'right' }}>
               <div style={{ fontWeight: 'bold' }}>{stock.iexRealtimePrice}</div>
-              <div style={{ fontSize: '11px' }}>{stock.changePercent}</div>
+              <div className={stock.changePercent.includes('-') ? 'negative' : 'positive'} style={{ fontSize: '11px' }}>{stock.changePercent}</div>
             </div>
           </Grid>
         ))}
@@ -63,7 +63,7 @@ const Overview = (props) => {
   
                   <div style={{ bottom: '5px', right: '10px', position: 'absolute', textAlign: 'right' }}>
                     <div style={{fontWeight: 'bold'}}>{stock.iexRealtimePrice}</div>
-                    <div style={{fontSize: '11px'}}>{stock.changePercent}</div>
+                    <div className={stock.changePercent.includes('-') ? 'negative' : 'positive'} style={{fontSize: '11px'}}>{stock.changePercent}</div>
                   </div>
                 </div>
             ))}

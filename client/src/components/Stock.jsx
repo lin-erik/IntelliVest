@@ -51,17 +51,32 @@ class Stock extends React.Component {
 
   getPrice() {
     axios.get(`https://api.iextrading.com/1.0/stock/${this.props.symbol}/price`)
-      .then(response => {
-        this.setState({
-          price: response.data
-        });
-      })
-      .catch(err => {
-        console.error('Error fetching realtime price', err);
-      })
-      .then(() => {
-        this.createGraph();
-      });
+         .then(response => {
+           this.setState({
+             price: response.data
+           });
+         })
+         .catch(err => {
+           console.error('Error fetching realtime price', err);
+         })
+         .then(() => {
+           this.createGraph();
+         });
+  }
+
+  getPrevious() {
+    axios.get(`https://api.iextrading.com/1.0/stock/${this.props.symbol}/previous`)
+         .then(response => {
+           var {change, changePercent} = response.data;
+
+           this.setState({
+             change,
+             changePercent
+           });
+         })
+         .catch(err => {
+           console.error('Error fetching previous information', err);
+         })
   }
 
   createGraph() {
@@ -76,8 +91,9 @@ class Stock extends React.Component {
 
   componentDidMount() {
     this.getCompanyInfo();
+    this.getPrevious();
     this.getRelated();
-
+    
     setTimeout(() => {
       this.getPrice();
     }, 5000);
@@ -89,6 +105,7 @@ class Stock extends React.Component {
         <div style={{padding: '2%'}}>
           <h2 style={{margin: '0', paddingBottom: '10px'}}>{this.state.companyName + ' (' + this.props.symbol.toUpperCase() + ')'}</h2>
           <h1 style={{margin: '0'}}>{this.state.price}</h1>
+          <p className={this.state.changePercent < 0 ? 'negative' : 'positive'}>{this.state.change} ({this.state.changePercent}%)</p>
         </div>
         
         <div id='graphdiv' style={{ margin: 'auto', marginTop: '2%', marginBottom: '2%', width: '50%' }}></div>
