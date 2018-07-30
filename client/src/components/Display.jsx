@@ -20,8 +20,13 @@ class Display extends React.Component {
             <LinearProgress variant='determinate' value={this.props.completed} />
           </div>
 
-          <div style={{ paddingTop: '1%' }}>
-            <Stock key={this.props.stocks[0]} symbol={this.props.symbol} stocks={this.props.stocks} createdGraph={this.props.createdGraph} />
+          <div style={{ margin: 'auto', marginTop: '3%', marginBottom: '3%', width: '75%' }}>
+            <Stock key={this.props.stocks[0]}
+                   symbol={this.props.symbol}
+                   stocks={this.props.stocks}
+                   createdGraph={this.props.createdGraph}
+                   handleClick={this.props.handleClick}
+                   />
             <Analysis key={this.props.stocks[this.props.stocks.length - 1]} symbol={this.props.symbol} completedAnalysis={this.props.completedAnalysis} />
           </div>
         </div>
