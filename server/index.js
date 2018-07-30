@@ -3,7 +3,7 @@ const parser = require('body-parser');
 const session = require('express-session');
 const app = express();
 
-const discovery = require('../config.js');
+const discovery = require('../config_example.js');
 const models = require('./models.js');
 
 app.use(express.static(__dirname + '/../client/dist'));

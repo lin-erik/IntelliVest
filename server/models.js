@@ -1,4 +1,4 @@
-const db = require('./db.js');
+const db = require('./db_example.js');
 
 module.exports = {
   register: ({username, password}, cb) => {
