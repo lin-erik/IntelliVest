@@ -26,10 +26,10 @@ class Analysis extends React.Component {
     parent.forEach(data => {
       var date = new Date(data.key_as_string);
       var month = date.getMonth() + 1;
-      var date = date.getDate();
+      var day = date.getDate();
       var outlier = data.anomaly || null;
 
-      date = month + '/' + date;
+      date = month + '/' + day;
 
       var info = data.aggregations[0].results[0].aggregations[0].results[0].key;
 
@@ -64,9 +64,9 @@ class Analysis extends React.Component {
         }
       }
 
-      positive = (((positive / total) * 100) - 1).toFixed(5) + '%';
-      negative = (((negative / total) * 100) - 1).toFixed(5) + '%';
-      neutral = ( ((neutral / total) * 100) - 1).toFixed(5) + '%';
+      positive = ( ((positive / total) * 100) - 0.5).toFixed(5) + '%';
+      negative = ( ((negative / total) * 100) - 0.5).toFixed(5) + '%';
+      neutral = ( ((neutral / total) * 100) - 0.5).toFixed(5) + '%';
 
       child_container.push({ key, positive, negative, neutral });
     });
@@ -171,7 +171,7 @@ class Analysis extends React.Component {
       return null;
     } else {
       return(
-        <div style={{width: '75%', margin: 'auto', marginTop: '3%'}}>
+        <div style={{margin: 'auto', marginTop: '3%'}}>
           <Grid container spacing={16}>
             <Grid item xs>
               <TopResults top_results={this.state.top_results} />
