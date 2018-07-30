@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Display from './components/Display.jsx';
 import Landing from './components/Landing.jsx';
+import Account from './components/Account.jsx';
 
 import Input from '@material-ui/core/Input';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
 import Search from '@material-ui/icons/Search';
-import axios from 'axios';
 
+import axios from 'axios';
 import '../dist/styles.css';
 
 class App extends React.Component {
@@ -29,6 +30,8 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.resetProgress = this.resetProgress.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.goHome = this.goHome.bind(this);
 
     this.progress = this.progress.bind(this);
     this.createdGraph = this.createdGraph.bind(this);
@@ -55,9 +58,33 @@ class App extends React.Component {
     this.getStock();
   }
 
+  handleClick(e) {
+    this.setState({
+      symbol: e.target.textContent,
+      graph_created: false,
+      analysis_complete: false,
+      completed: 0
+    });
+
+    this.timer();
+    this.getStock(e.target.textContent);
+  }
+
   resetProgress(val) {
     this.setState({
       completed: val
+    });
+  }
+
+  goHome() {
+    this.resetProgress(0);
+
+    this.setState({
+      searched: false,
+      graph_created: false,
+      analysis_complete: false,
+      symbol: '',
+      stocks: []
     });
   }
 
@@ -91,10 +118,11 @@ class App extends React.Component {
     });
   }
 
-  getStock() {
+  getStock(symbol) {
     var container = [];
+    var param = symbol || this.state.symbol;
 
-    axios.get(`https://api.iextrading.com/1.0/stock/${this.state.symbol}/chart/5y`)
+    axios.get(`https://api.iextrading.com/1.0/stock/${param}/chart/5y`)
       .then(response => {
         console.log('Response from API', response);
 
@@ -121,10 +149,10 @@ class App extends React.Component {
   render() {
     return(
       <div>
-        <div style={{paddingTop: '1%', paddingBottom: '1%', boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)', backgroundColor: 'white'}}>
+        <div style={{padding: '10px', boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)', backgroundColor: 'white'}}>
           <Grid container spacing={8}>
             <Grid style={{textAlign: 'center'}} item xs>
-              <div>Logo</div>
+              <div onClick={this.goHome}>Logo</div>
             </Grid>
 
             <Grid item xs>
@@ -145,18 +173,25 @@ class App extends React.Component {
               </form>
             </Grid>
 
-            <Grid style={{textAlign: 'center'}} item xs>
-              <div>Login</div>
+            <Grid item xs>
+              <Account />
             </Grid>
+
           </Grid>
         </div>
 
         <div>
-          <Landing searched={this.state.searched} />
+          <Landing handleClick={this.handleClick} searched={this.state.searched} />
         </div>
 
         <div>
-          <Display completed={this.state.completed} symbol={this.state.symbol} stocks={this.state.stocks} createdGraph={this.createdGraph} completedAnalysis={this.completedAnalysis} />
+          <Display completed={this.state.completed}
+                   symbol={this.state.symbol}
+                   stocks={this.state.stocks}
+                   createdGraph={this.createdGraph}
+                   completedAnalysis={this.completedAnalysis}
+                   handleClick={this.handleClick}
+                   />
         </div>
       </div>
     );
