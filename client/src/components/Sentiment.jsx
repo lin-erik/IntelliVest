@@ -40,7 +40,7 @@ class Sentiment extends React.Component {
               <div key={ind} style={{ width: '40%', height: '50px', paddingTop: '1%', paddingBottom: '1%', margin: 'auto' }}>
                 <div style={{ fontWeight: 'bold' }}>{el.key}</div>
                 
-                <div>
+                <div style={{whiteSpace: 'nowrap'}}>
                   <span style={{ width: el.negative, height: '100%', display: 'inline-block', background:'#b33000', marginRight: '3px' }}>&nbsp;</span>
                   <span style={{ width: el.neutral, height: '100%', display: 'inline-block', background: '#A7A9AC' }}>&nbsp;</span>
                   <span style={{ width: el.positive, height: '100%', display: 'inline-block', background: '#9acd32', marginLeft: '3px' }}>&nbsp;</span>
