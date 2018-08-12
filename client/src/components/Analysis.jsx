@@ -3,7 +3,7 @@ import Anomaly from './Anomaly.jsx';
 import Sentiment from './Sentiment.jsx';
 import TopResults from './TopResults.jsx';
 
-import Grid from '@material-ui/core/Grid';
+import { Grid } from 'semantic-ui-react';
 
 import axios from 'axios';
 
@@ -33,7 +33,12 @@ class Analysis extends React.Component {
 
       var info = data.aggregations[0].results[0].aggregations[0].results[0].key;
 
-      container.push({ name: date, articles: data.matching_results, desc: info, outlier });
+      container.push({
+        name: date,
+        articles: data.matching_results,
+        desc: info,
+        outlier
+      });
     });
 
     this.setState({
@@ -64,9 +69,9 @@ class Analysis extends React.Component {
         }
       }
 
-      positive = ( ((positive / total) * 100) - 0.5).toFixed(5) + '%';
-      negative = ( ((negative / total) * 100) - 0.5).toFixed(5) + '%';
-      neutral = ( ((neutral / total) * 100) - 0.5).toFixed(5) + '%';
+      positive = ((positive / total) * 100 - 0.5).toFixed(5) + '%';
+      negative = ((negative / total) * 100 - 0.5).toFixed(5) + '%';
+      neutral = ((neutral / total) * 100 - 0.5).toFixed(5) + '%';
 
       child_container.push({ key, positive, negative, neutral });
     });
@@ -93,9 +98,9 @@ class Analysis extends React.Component {
     }
 
     var total = positive + negative + neutral;
-    positive = (((positive / total) * 100) - 0.5).toFixed(5) + '%';
-    negative = (((negative / total) * 100) - 0.5).toFixed(5) + '%';
-    neutral = ( ((neutral / total) * 100) - 0.5).toFixed(5) + '%';
+    positive = ((positive / total) * 100 - 0.5).toFixed(5) + '%';
+    negative = ((negative / total) * 100 - 0.5).toFixed(5) + '%';
+    neutral = ((neutral / total) * 100 - 0.5).toFixed(5) + '%';
 
     this.setState({
       main_sentiment: { positive, negative, neutral }
@@ -129,7 +134,8 @@ class Analysis extends React.Component {
         container.id = result.id;
         container.score = result.result_metadata.score;
         container.host = result.host;
-        container.crawl_date = month + '/' + date + '/' + year + ' ' + hour + ':' + min + ampm;
+        container.crawl_date =
+          month + '/' + date + '/' + year + ' ' + hour + ':' + min + ampm;
         container.title = result.title;
         container.url = result.url;
 
@@ -143,11 +149,12 @@ class Analysis extends React.Component {
   }
 
   getDiscovery() {
-    axios.get('/discovery', {
-      params: {
-        symbol: this.props.symbol
-      }
-    })
+    axios
+      .get('/discovery', {
+        params: {
+          symbol: this.props.symbol
+        }
+      })
       .then(response => {
         this.extractAnomaly(response.data);
         this.extractChildSentiment(response.data);
@@ -157,32 +164,35 @@ class Analysis extends React.Component {
       .catch(err => {
         console.error('Error retrieving from server', err);
       })
-      .then( () => {
+      .then(() => {
         this.props.completedAnalysis();
       });
   }
 
   componentDidMount() {
-    this.getDiscovery();
+    // this.getDiscovery();
   }
 
   render() {
     if (!this.state.top_results.length) {
       return null;
     } else {
-      return(
-        <div style={{margin: 'auto', marginTop: '3%'}}>
-          <Grid container spacing={16}>
-            <Grid item xs>
+      return (
+        <div style={{ margin: 'auto', marginTop: '3%' }}>
+          <Grid container columns="equal">
+            <Grid.Column>
               <TopResults top_results={this.state.top_results} />
-            </Grid>
+            </Grid.Column>
 
-            <Grid item xs>
+            <Grid.Column>
               <Anomaly key={this.state.anomaly} anomaly={this.state.anomaly} />
-            </Grid>
+            </Grid.Column>
           </Grid>
-          
-          <Sentiment child_sentiment={this.state.child_sentiment} main_sentiment={this.state.main_sentiment} />
+
+          <Sentiment
+            child_sentiment={this.state.child_sentiment}
+            main_sentiment={this.state.main_sentiment}
+          />
         </div>
       );
     }
