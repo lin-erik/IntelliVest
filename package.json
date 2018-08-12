@@ -39,6 +39,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "recharts": "^1.1.0",
+    "semantic-ui-react": "^0.82.2",
     "style-loader": "^0.21.0",
     "watson-developer-cloud": "^3.7.0"
   }
