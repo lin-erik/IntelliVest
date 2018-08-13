@@ -3,7 +3,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { Grid } from 'semantic-ui-react';
 
-import '/Users/erik/Desktop/MVP/intelligent-investing/client/dist/dygraph.css';
+import '../../dist/dygraph.css';
 import axios from 'axios';
 
 import Dygraph from 'dygraphs';

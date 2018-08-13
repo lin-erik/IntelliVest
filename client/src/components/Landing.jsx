@@ -2,8 +2,7 @@ import React from 'react';
 import Overview from './Overview.jsx';
 import News from './News.jsx';
 
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
+import { Dropdown } from 'semantic-ui-react';
 
 import axios from 'axios';
 
@@ -74,9 +73,9 @@ class Landing extends React.Component {
       });
   }
 
-  handleViewChange(e) {
+  handleViewChange(e, { value }) {
     this.setState({
-      view: e.target.value
+      view: value
     });
   }
 
@@ -90,6 +89,12 @@ class Landing extends React.Component {
     if (this.props.searched) {
       return null;
     } else {
+      const options = [
+        { key: 1, text: 'Most Active', value: 1 },
+        { key: 2, text: 'Top Gainers', value: 2 },
+        { key: 3, text: 'Top Losers', value: 3 }
+      ];
+
       return (
         <div
           style={{
@@ -104,15 +109,12 @@ class Landing extends React.Component {
         >
           <h1 style={{ textAlign: 'center' }}>Today's Market</h1>
           <div style={{ textAlign: 'center' }}>
-            <Select
-              value={this.state.view}
+            <Dropdown
               onChange={this.handleViewChange}
-              name="view"
-            >
-              <MenuItem value={1}>Most Active</MenuItem>
-              <MenuItem value={2}>Top Gainers</MenuItem>
-              <MenuItem value={3}>Top Losers</MenuItem>
-            </Select>
+              options={options}
+              selection
+              value={this.state.view}
+            />
           </div>
 
           <div className="container-fluid" style={{ margin: '1%' }}>
