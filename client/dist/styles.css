@@ -5,3 +5,11 @@
 body {
   background-color: #FAFAFA
 }
+
+.negative {
+  color: red;
+}
+
+.positive {
+  color: green;
+}

@@ -1,11 +1,14 @@
 // node_modules
 node_modules
 
-// bundle.js
-client/dist/bundle.js
-
 // config.js
 config.js
 
 // db.js
 server/db.js
+
+//bundle.js
+client/dist/bundle.js
+
+//temp
+temp
