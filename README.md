@@ -2,6 +2,8 @@
 
 Sentiment analysis of stock market news and visualization of its impact on financial movement
 
+![IntelliVest](intellivest.gif)
+
 ## Table of Contents
 1. [Features](#features)
 1. [Sentiment](#sentiment)
@@ -26,4 +28,12 @@ Sentiment analysis of stock market news and visualization of its impact on finan
 * [Watson Developer Cloud](https://github.com/watson-developer-cloud/node-sdk)
 
 ## Screenshots
-![IntelliVest](intellivest.gif)
+![landing](landing.png)
+
+![loading](loading.png)
+
+![stock](stock.png)
+
+![analysis](analysis.png)
+
+![sentiment](sentiment.png)
