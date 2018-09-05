@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Display from './components/Display.jsx';
 import Landing from './components/Landing.jsx';
-import Account from './components/Account.jsx';
 
 import { Input, Form, Button, Grid } from 'semantic-ui-react';
 
