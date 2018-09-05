@@ -40,7 +40,7 @@ class Landing extends React.Component {
           }) => {
             var date = new Date(latestUpdate);
             var month = date.getMonth() + 1;
-            var day = date.getMonth();
+            var day = date.getDate();
             var year = date.getFullYear();
 
             date = month + '/' + day + '/' + year;
@@ -60,8 +60,6 @@ class Landing extends React.Component {
             });
           }
         );
-
-        console.log(container);
       })
       .catch(err => {
         console.error('Error fetching from API (Overview)', err);

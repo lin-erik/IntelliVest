@@ -151,10 +151,6 @@ class App extends React.Component {
                 />
               </Form>
             </Grid.Column>
-
-            <Grid.Column>
-              <Account />
-            </Grid.Column>
           </Grid>
         </div>
 
