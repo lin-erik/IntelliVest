@@ -24,7 +24,7 @@ app.get('/discovery', (req, res) => {
   discovery.query({
     environment_id: 'system',
     collection_id: 'news-en',
-    filter: 'language:(english|en),crawl_date>2018-06-12,crawl_date<2018-08-12',
+    filter: 'language:(english|en),crawl_date>2018-07-05,crawl_date<2018-09-05',
     natural_language_query: `${req.query.symbol}`,
     aggregation: '[term(host).term(enriched_text.sentiment.document.label),term(enriched_text.sentiment.document.label),timeslice(field:crawl_date,interval:1day,time_zone:America/New_York,anomaly:true).term(enriched_text.keywords.text,count:1).term(title,count:1),nested(enriched_title.entities).filter(enriched_title.entities.type:Company).term(enriched_title.entities.text),nested(enriched_title.entities).filter(enriched_title.entities.type:Person).term(enriched_title.entities.text),term(enriched_title.concepts.text)]',
     count: 5,
