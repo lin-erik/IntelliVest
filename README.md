@@ -15,7 +15,7 @@ Sentiment analysis of stock market news and visualization of its impact on finan
 
 ## Sentiment
 - Leveraged IBM Watson Discovery to identify sentiment in stock news.
-- Anomalies in mentions of the searched stock is rendered.
+- Anomalies detected in mentions of the searched stock are graphed.
 - Overall sentiment and sentiment from specific sources are displayed.
 
 ## Built With
