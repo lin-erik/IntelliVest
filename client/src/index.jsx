@@ -121,6 +121,7 @@ class App extends React.Component {
       })
       .then(() => {
         this.setState({
+          symbol: symbol || this.state.symbol,
           stocks: container,
           searched: true
         });
