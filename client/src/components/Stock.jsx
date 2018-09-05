@@ -123,7 +123,7 @@ class Stock extends React.Component {
           <h2 style={{ margin: '0', paddingBottom: '10px' }}>
             {this.state.companyName +
               ' (' +
-              this.props.symbol.toUpperCase() +
+              this.props.shownSymbol.toUpperCase() +
               ')'}
           </h2>
           <h1 style={{ margin: '0' }}>{this.state.price}</h1>

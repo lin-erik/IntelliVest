@@ -30,6 +30,7 @@ class Display extends React.Component {
             <Stock
               key={this.props.stocks[0]}
               symbol={this.props.symbol}
+              shownSymbol={this.props.shownSymbol}
               stocks={this.props.stocks}
               createdGraph={this.props.createdGraph}
               handleClick={this.props.handleClick}

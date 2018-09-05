@@ -17,6 +17,7 @@ class App extends React.Component {
       updateAnalysis: 0,
       symbol: '',
       searched: false,
+      shownSymbol: '',
       completed: false,
       graph_created: false,
       analysis_complete: false
@@ -44,7 +45,8 @@ class App extends React.Component {
     this.setState({
       graph_created: false,
       analysis_complete: false,
-      completed: false
+      completed: false,
+      shownSymbol: this.state.symbol
     });
 
     this.getStock();
@@ -164,6 +166,7 @@ class App extends React.Component {
           <Display
             completed={this.state.completed}
             symbol={this.state.symbol}
+            shownSymbol={this.state.shownSymbol}
             stocks={this.state.stocks}
             createdGraph={this.createdGraph}
             completedAnalysis={this.completedAnalysis}
