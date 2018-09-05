@@ -15,6 +15,8 @@ Sentiment analysis of stock market news and visualization of its impact on finan
 
 ## Sentiment
 - Leveraged IBM Watson Discovery to identify sentiment in stock news.
+- Anomalies in mentions of the searched stock is rendered.
+- Overall sentiment and sentiment from specific sources are displayed.
 
 ## Built With
 * [React](https://reactjs.org/)
@@ -22,3 +24,6 @@ Sentiment analysis of stock market news and visualization of its impact on finan
 * [Express](https://expressjs.com/)
 * [Recharts](http://recharts.org/en-US/)
 * [Watson Developer Cloud](https://github.com/watson-developer-cloud/node-sdk)
+
+## Screenshots
+![IntelliVest](intellivest.gif)
