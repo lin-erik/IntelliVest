@@ -15,7 +15,8 @@ class Analysis extends React.Component {
       anomaly: [],
       child_sentiment: [],
       main_sentiment: [],
-      top_results: []
+      top_results: [],
+      error: false
     };
   }
 
@@ -162,6 +163,7 @@ class Analysis extends React.Component {
         this.extractTopResults(response.data);
       })
       .catch(err => {
+        this.setState({ error: true })
         console.error('Error retrieving from server', err);
       })
       .then(() => {
@@ -170,7 +172,7 @@ class Analysis extends React.Component {
   }
 
   componentDidMount() {
-    // this.getDiscovery();
+    this.getDiscovery();
   }
 
   render() {

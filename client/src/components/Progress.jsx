@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dimmer, Loader, Image } from 'semantic-ui-react';
 
-const Progress = (props) => {
+const Progress = props => {
   if (props.completed) {
     return null;
   } else {

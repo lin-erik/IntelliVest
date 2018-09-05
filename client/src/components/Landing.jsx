@@ -27,7 +27,7 @@ class Landing extends React.Component {
     axios
       .get(`https://api.iextrading.com/1.0/stock/market/list/${param}`)
       .then(response => {
-        console.log('Response from API (Overview)', response);
+        // console.log('Response from API (Overview)', response);
 
         response.data.forEach(
           ({

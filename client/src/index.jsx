@@ -103,7 +103,7 @@ class App extends React.Component {
     axios
       .get(`https://api.iextrading.com/1.0/stock/${param}/chart/5y`)
       .then(response => {
-        console.log('Response from API', response);
+        // console.log('Response from API', response);
 
         response.data.forEach(data => {
           var stockInfo = [];
@@ -135,12 +135,12 @@ class App extends React.Component {
             backgroundColor: 'white'
           }}
         >
-          <Grid columns='equal' verticalAlign='middle' textAlign='center'>
+          <Grid verticalAlign='middle' textAlign='center'>
             <Grid.Column>
-              <div onClick={this.goHome}>IntelliVest</div>
+              <div className={'pointer'} onClick={this.goHome}>IntelliVest</div>
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column width={8}>
               <Form>
                 <Input
                   fluid

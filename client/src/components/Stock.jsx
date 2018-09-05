@@ -158,17 +158,19 @@ class Stock extends React.Component {
                 <div>
                   <strong>Related</strong>
 
-                  <Grid container columns="equal">
-                    {this.state.related.map(symbol => (
-                      <Grid.Column>
-                        <Button
-                          color="primary"
-                          onClick={this.props.handleClick}
-                        >
-                          {symbol}
-                        </Button>
-                      </Grid.Column>
-                    ))}
+                  <Grid columns='equal'>
+                    <Grid.Row>
+                      {this.state.related.map((symbol, ind) => (
+                        <Grid.Column key={ind}>
+                          <Button
+                            color="primary"
+                            onClick={this.props.handleClick}
+                          >
+                            {symbol}
+                          </Button>
+                        </Grid.Column>
+                      ))}
+                    </Grid.Row>
                   </Grid>
                 </div>
               </Grid.Row>

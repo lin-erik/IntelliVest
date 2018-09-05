@@ -1,10 +1,10 @@
-import React from 'react';
-import { Grid } from 'semantic-ui-react';
+import React from 'react'
+import { Grid } from 'semantic-ui-react'
 
-const Gainers = props => (
+const Active = props => (
   <Grid container columns="equal">
     <Grid.Row style={{ paddingBottom: '0px' }}>
-      {props.gainers.map((stock, ind) => (
+      {props.mostactive.map((stock, ind) => (
         <Grid.Column
           key={ind}
           style={{
@@ -43,10 +43,14 @@ const Gainers = props => (
               textAlign: 'right'
             }}
           >
-            <div style={{ fontWeight: 'bold' }}>{stock.iexRealtimePrice}</div>
+            <div style={{ fontWeight: 'bold' }}>
+              {stock.iexRealtimePrice}
+            </div>
             <div
               className={
-                stock.changePercent.includes('-') ? 'negative' : 'positive'
+                stock.changePercent.includes('-')
+                  ? 'negative'
+                  : 'positive'
               }
               style={{ fontSize: '11px' }}
             >
@@ -58,9 +62,11 @@ const Gainers = props => (
     </Grid.Row>
 
     <Grid.Row centered style={{ paddingTop: '0px' }}>
-      <p style={{ fontSize: '10px' }}>Last update: {props.gainers[0].date}</p>
+      <p style={{ fontSize: '10px' }}>
+        Last update: {props.mostactive[0].date}
+      </p>
     </Grid.Row>
   </Grid>
 );
 
-export default Gainers;
+export default Active;

@@ -33,7 +33,7 @@ app.get('/discovery', (req, res) => {
   },
   function(err, response) {
     if (err) {
-      console.error('Error querying Discovery', err);
+      res.status(404).send();
     } else {
       res.send(response);
     }

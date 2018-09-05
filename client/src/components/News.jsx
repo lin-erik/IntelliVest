@@ -19,7 +19,7 @@ class News extends React.Component {
     axios
       .get('https://api.iextrading.com/1.0/stock/market/news')
       .then(response => {
-        console.log('Response from API (News)', response);
+        // console.log('Response from API (News)', response);
 
         response.data.forEach(
           ({ datetime, headline, source, url, summary, image }) => {
@@ -48,8 +48,8 @@ class News extends React.Component {
       return (
         <div>
           <Card.Group itemsPerRow={3} centered>
-            {this.state.news.map(data => (
-              <Card href={data.url} color="blue">
+            {this.state.news.map((data, ind) => (
+              <Card key={ind} href={data.url} color="blue">
                 <Card.Content>
                   <Card.Header>{data.headline}</Card.Header>
                   <Card.Meta>{data.source}</Card.Meta>
